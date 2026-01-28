@@ -1,0 +1,19 @@
+.pet-avatar {
+  border: 5px solid var(--primary-color);
+}
+
+@media (min-width: 768px) {
+  .w-md-50 {
+    width: 50% !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .w-md-auto {
+    width: auto !important;
+  }
+}
+
+.progress-bar-custom {
+  width: 75%;
+}

@@ -1,0 +1,32 @@
+.guide-card {
+  transition: all 0.3s ease;
+}
+
+.guide-card:hover {
+  transform: translateX(10px);
+}
+
+.accordion-button:not(.collapsed) {
+  background: var(--brown-color);
+  color: white;
+  box-shadow: none;
+}
+
+.sticky-sidebar {
+  position: sticky;
+  top: 90px;
+}
+
+.sticky-sidebar {
+  margin-top: 80px;
+}
+
+@media (max-width: 991.98px) {
+  .sticky-sidebar {
+    margin-top: 0 !important;
+  }
+}
+
+.video-thumbnail {
+  height: 250px;
+}

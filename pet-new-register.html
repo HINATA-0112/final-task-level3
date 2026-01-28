@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetLife 新規登録</title>
+
+    <link rel="icon" href="/img/nikukyu_kuro.png" type="image/png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
+    <!-- Custom css -->
+    <link rel="stylesheet" href="/style/style.css">
+
+</head>
+
+<body>
+
+    <!-- ナビゲーションバー -->
+    <nav class="navbar navbar-expand-lg sticky-top bg-white shadow-sm">
+
+        <div class="container">
+
+            <!-- ブランドロゴ -->
+            <a class="navbar-brand fw-bold fs-4" href="/index.html">
+                <i class="bi bi-heart-fill text-danger"></i> PetLife
+            </a>
+
+            <!-- ハンバーガーメニュー -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-label="ナビゲーションメニューを開く">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- ナビゲーションメニュー -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/index.html">ホーム</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-normal" href="/pet-guide-list.html">ペット図鑑</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-normal" href="/pet-care-guide.html">飼い方ガイド</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-normal" href="/pet-guide-qa.html">Q&A</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-normal" href="/pet-guide-record.html">飼育記録</a>
+                    </li>
+                    <!-- ログインボタン -->
+                    <li class="nav-item">
+                        <a href="/pet-login.html"
+                            class="btn btn-outline-success ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-pill fw-bold">
+                            <i class="bi bi-person-circle"></i> ログイン
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    <!-- 新規登録 -->
+    <div class="container mt-5 mb-5">
+
+        <div class="row justify-content-center">
+
+            <div class="col-11 col-sm-10 col-md-6 col-lg-5">
+
+                <div class="card shadow-sm rounded-4 p-4 border-0">
+
+                    <div class="text-center mb-4">
+                        <i class="bi bi-person-circle fs-1 text-success"></i>
+                        <h2 class="fw-bold mt-2 brown-color">新規登録</h2>
+                        <p class="text-muted mb-0">
+                            PetLifeへようこそ
+                        </p>
+                    </div>
+
+                    <form class="px-2 px-md-4">
+
+                        <div class="mb-4">
+                            <label class="form-label small brown-color">お名前</label>
+                            <input type="text" class="form-control" placeholder="山田 太郎">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label small brown-color">メールアドレス</label>
+                            <input type="email" class="form-control login-input" placeholder="example@petlife.jp">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label small brown-color">パスワード</label>
+                            <input type="password" class="form-control login-input" placeholder="8文字以上">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label small brown-color">パスワード（確認）</label>
+                            <input type="password" class="form-control login-input" placeholder="もう一度入力">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label small brown-color">飼っているペット</label>
+                            <select class="form-select text-secondary">
+                                <option>犬</option>
+                                <option>猫</option>
+                                <option>うさぎ</option>
+                                <option>ハムスター</option>
+                                <option>その他</option>
+                            </select>
+                        </div>
+
+                        <div class="form-check mb-4">
+                            <input class="form-check-input" type="checkbox" id="agree">
+                            <label class="form-check-label small" for="agree">
+                                <a href="#" class="text-success">利用規約</a>と
+                                <a href="#" class="text-success">プライバシーポリシー</a>に同意します
+                            </label>
+                        </div>
+
+
+                        <div class="d-grid mb-3 p-1 p-md-3">
+                            <a href="/index.html" type="submit" class="btn btn-success rounded-pill fw-bold">
+                                アカウントを作成する
+                            </a>
+                        </div>
+
+                        <p class="text-center small text-muted mt-3">
+                            すでにアカウントをお持ちの方は
+                            <a href="/pet-login.html" class="text-success fw-bold">ログイン</a>
+                        </p>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- フッター -->
+    <footer class="text-white p-2 p-md-5">
+        <div class="container">
+            <div class="row mt-3">
+                <div class="col-md-5 mb-4">
+                    <h5 class="fw-bold mb-4">
+                        <i class="bi bi-heart-fill text-danger"></i> PetLife
+                    </h5>
+                    <p>ペットとの幸せな暮らしを応援する情報サイト</p>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h6 class="fw-bold mb-4">サイト情報</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white text-decoration-none">About</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">利用規約</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">プライバシー</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h6 class="fw-bold mb-4">サポート</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white text-decoration-none">ヘルプ</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">お問い合わせ</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h6 class="fw-bold mb-4">フォローする</h6>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-white fs-4"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="text-white fs-4"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-white fs-4"><i class="bi bi-youtube"></i></a>
+                        <a href="#" class="text-white fs-4"><i class="bi bi-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-light">
+            <p class="text-center mb-0">&copy; 2024 PetLife. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

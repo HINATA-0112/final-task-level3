@@ -5,500 +5,979 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PetLife - Q&A・お悩み相談</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="icon" href="/img/nikukyu_kuro.png" type="image/png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    <style>
-        :root {
-            --primary-color: #10b981;
-            --secondary-color: #f59e0b;
-            --accent-color: #fb923c;
-            --brown-color: #78350f;
-        }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #fef3c7;
-        }
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style/style.css">
 
-        .navbar {
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
+    <!-- qa css -->
+    <link rel="stylesheet" href="style/qa.css">
 
-        .navbar-brand {
-            font-weight: bold;
-            color: var(--primary-color) !important;
-            font-size: 1.5rem;
-        }
-
-        .nav-link {
-            color: var(--brown-color) !important;
-            font-weight: 500;
-            margin: 0 10px;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--primary-color) !important;
-        }
-
-        .page-header {
-            background: linear-gradient(135deg, #dcfce7 0%, #fed7aa 100%);
-            padding: 60px 0;
-            border-radius: 0 0 50px 50px;
-            margin-bottom: 40px;
-        }
-
-        .search-box {
-            background: white;
-            border-radius: 50px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            padding: 8px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .search-box input {
-            border: none;
-            padding: 12px 20px;
-            border-radius: 50px;
-            width: 100%;
-        }
-
-        .search-box input:focus {
-            outline: none;
-        }
-
-        .search-box button {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border: none;
-            color: white;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: bold;
-        }
-
-        .category-tabs {
-            background: white;
-            border-radius: 30px;
-            padding: 10px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            margin-bottom: 30px;
-        }
-
-        .category-tabs .nav-link {
-            border-radius: 25px;
-            padding: 12px 25px;
-            color: var(--brown-color);
-            font-weight: 600;
-            margin: 5px;
-            transition: all 0.3s ease;
-        }
-
-        .category-tabs .nav-link:hover {
-            background-color: rgba(16, 185, 129, 0.1);
-        }
-
-        .category-tabs .nav-link.active {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white !important;
-        }
-
-        .accordion-item {
-            background: white;
-            border: none;
-            border-radius: 20px !important;
-            margin-bottom: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-        }
-
-        .accordion-button {
-            background-color: white;
-            color: var(--brown-color);
-            font-weight: 600;
-            font-size: 1.1rem;
-            padding: 20px 25px;
-            border-radius: 20px !important;
-        }
-
-        .accordion-button:not(.collapsed) {
-            background: linear-gradient(135deg, #dcfce7, #fed7aa);
-            color: var(--brown-color);
-            box-shadow: none;
-        }
-
-        .accordion-button:focus {
-            box-shadow: none;
-            border: none;
-        }
-
-        .accordion-button::after {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%2378350f'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
-        }
-
-        .accordion-body {
-            padding: 25px;
-            background-color: #fefefe;
-        }
-
-        .question-meta {
-            display: flex;
-            gap: 15px;
-            margin-top: 15px;
-            flex-wrap: wrap;
-        }
-
-        .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            color: #6b7280;
-            font-size: 0.9rem;
-        }
-
-        .badge-category {
-            background: var(--secondary-color);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .sidebar-card {
-            background: white;
-            border-radius: 25px;
-            padding: 25px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            margin-bottom: 20px;
-        }
-
-        .ranking-item {
-            display: flex;
-            align-items: start;
-            padding: 15px 0;
-            border-bottom: 1px solid #f3f4f6;
-        }
-
-        .ranking-item:last-child {
-            border-bottom: none;
-        }
-
-        .ranking-number {
-            width: 35px;
-            height: 35px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            flex-shrink: 0;
-            margin-right: 15px;
-        }
-
-        .ranking-number.gold {
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
-        }
-
-        .ranking-number.silver {
-            background: linear-gradient(135deg, #d1d5db, #9ca3af);
-        }
-
-        .ranking-number.bronze {
-            background: linear-gradient(135deg, #d97706, #92400e);
-        }
-
-        .btn-post-question {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border: none;
-            color: white;
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            width: 100%;
-            transition: all 0.3s ease;
-        }
-
-        .btn-post-question:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
-        }
-
-        .stats-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--primary-color);
-            padding: 8px 15px;
-            border-radius: 50px;
-            font-weight: 600;
-        }
-
-        footer {
-            background-color: var(--brown-color);
-            color: white;
-            padding: 40px 0;
-            margin-top: 80px;
-            border-radius: 50px 50px 0 0;
-        }
-
-        .answer-highlight {
-            background-color: #f0fdf4;
-            border-left: 4px solid var(--primary-color);
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 15px;
-        }
-
-        .helpful-btn {
-            background-color: transparent;
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .helpful-btn:hover {
-            background-color: var(--primary-color);
-            color: white;
-        }
-    </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg sticky-top">
+
+    <!-- ナビゲーションバー -->
+    <nav class="navbar navbar-expand-lg sticky-top bg-white shadow-sm">
+
         <div class="container">
-            <a class="navbar-brand" href="#">
+
+            <!-- ブランドロゴ -->
+            <a class="navbar-brand fw-bold fs-4" href="/index.html">
                 <i class="bi bi-heart-fill text-danger"></i> PetLife
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+
+            <!-- ハンバーガーメニュー -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-label="ナビゲーションメニューを開く">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
+            <!-- ナビゲーションメニュー -->
             <div class="collapse navbar-collapse" id="navbarNav">
+
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">ホーム</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">ペット図鑑</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">飼い方ガイド</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="#">Q&A</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">飼育記録</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/index.html">ホーム</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-normal" href="/pet-guide-list.html">ペット図鑑</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-normal" href="/pet-care-guide.html">飼い方ガイド</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-normal" href="/pet-guide-qa.html">Q&A</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-normal" href="/pet-guide-record.html">飼育記録</a>
+                    </li>
+                    <!-- ログインボタン -->
+                    <li class="nav-item">
+                        <a href="/pet-login.html"
+                            class="btn btn-outline-success ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-pill fw-bold">
+                            <i class="bi bi-person-circle"></i> ログイン
+                        </a>
+                    </li>
                 </ul>
-                <button class="btn btn-outline-success ms-3 rounded-pill fw-bold">
-                    <i class="bi bi-person-circle"></i> ログイン
-                </button>
+
             </div>
+
         </div>
+
     </nav>
 
-    <div class="page-header">
+    <!-- ページヘッダー -->
+    <div class="page-header mb-5">
+
         <div class="container">
-            <div class="text-center mb-4">
-                <h1 class="display-4 fw-bold" style="color: var(--brown-color);">
+
+            <div class="text-center">
+                <h1 class="display-4 fw-bold mb-5 brown-color">
                     <i class="bi bi-chat-dots-fill"></i> Q&A・お悩み相談
                 </h1>
-                <p class="lead" style="color: var(--brown-color);">
+                <p class="lead brown-color">
                     ペットに関する疑問や悩みを解決しましょう
                 </p>
             </div>
 
-            <div class="search-box">
+            <!-- 検索ボックス -->
+            <div class="bg-white rounded-pill p-2 mb-5 w-75 mx-auto shadow-sm">
+
                 <div class="d-flex align-items-center">
-                    <input type="text" class="flex-grow-1" placeholder="質問を検索...（例：犬のしつけ、猫の健康）">
-                    <button type="button"><i class="bi bi-search"></i> 検索</button>
-                </div>
-            </div>
-
-            <div class="text-center mt-4">
-                <div class="d-flex justify-content-center gap-3 flex-wrap">
-                    <span class="stats-badge"><i class="bi bi-chat-left-text"></i> 3,245件の質問</span>
-                    <span class="stats-badge"><i class="bi bi-people"></i> 12,890人の回答者</span>
-                    <span class="stats-badge"><i class="bi bi-check-circle"></i> 解決率 94%</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="category-tabs">
-                    <ul class="nav nav-pills justify-content-center flex-wrap" id="categoryTabs" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#all" type="button"
-                                role="tab">
-                                <i class="bi bi-grid"></i> すべて
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" data-bs-toggle="pill" data-bs-target="#dog" type="button"
-                                role="tab">
-                                <i class="bi bi-emoji-smile"></i> 犬
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" data-bs-toggle="pill" data-bs-target="#cat" type="button"
-                                role="tab">
-                                <i class="bi bi-emoji-heart-eyes"></i> 猫
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" data-bs-toggle="pill" data-bs-target="#health" type="button"
-                                role="tab">
-                                <i class="bi bi-heart-pulse"></i> 健康
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="tab-content">
-                    <div class="tab-pane fade show active" id="all" role="tabpanel">
-                        <div class="accordion" id="faqAccordion">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#faq1">
-                                        <i class="bi bi-question-circle-fill text-primary me-2"></i>
-                                        子犬のトイレトレーニングがうまくいきません
-                                    </button>
-                                </h2>
-                                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
-                                    <div class="accordion-body">
-                                        <div class="mb-3">
-                                            <span class="badge-category">犬</span>
-                                            <span class="badge-category" style="background: #8b5cf6;">しつけ</span>
-                                        </div>
-                                        <div class="answer-highlight">
-                                            <h6 class="fw-bold text-success mb-2">
-                                                <i class="bi bi-check-circle-fill"></i> ベストアンサー
-                                            </h6>
-                                            <p>トイレトレーニングは根気が必要です。成功したら褒めること、失敗しても叱らないことが重要です。</p>
-                                        </div>
-                                        <div class="question-meta">
-                                            <div class="meta-item">
-                                                <i class="bi bi-person-circle"></i><span>ドッグトレーナー山田</span>
-                                            </div>
-                                            <div class="meta-item">
-                                                <i class="bi bi-hand-thumbs-up"></i><span>312人が参考になった</span>
-                                            </div>
-                                        </div>
-                                        <div class="mt-3">
-                                            <button class="helpful-btn">
-                                                <i class="bi bi-hand-thumbs-up"></i> 参考になった
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#faq2">
-                                        <i class="bi bi-question-circle-fill text-primary me-2"></i>
-                                        猫が急にご飯を食べなくなりました
-                                    </button>
-                                </h2>
-                                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                    <div class="accordion-body">
-                                        <div class="mb-3">
-                                            <span class="badge-category" style="background: #fb923c;">猫</span>
-                                            <span class="badge-category" style="background: #ef4444;">健康</span>
-                                        </div>
-                                        <div class="answer-highlight">
-                                            <h6 class="fw-bold text-success mb-2">
-                                                <i class="bi bi-check-circle-fill"></i> ベストアンサー
-                                            </h6>
-                                            <p>24時間以上食事を取らない場合は早めに動物病院を受診してください。</p>
-                                        </div>
-                                        <div class="question-meta">
-                                            <div class="meta-item">
-                                                <i class="bi bi-person-circle"></i><span>獣医師・佐藤</span>
-                                            </div>
-                                            <div class="meta-item">
-                                                <i class="bi bi-hand-thumbs-up"></i><span>487人が参考になった</span>
-                                            </div>
-                                        </div>
-                                        <div class="mt-3">
-                                            <button class="helpful-btn">
-                                                <i class="bi bi-hand-thumbs-up"></i> 参考になった
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4">
-                <div class="sidebar-card">
-                    <button class="btn btn-post-question">
-                        <i class="bi bi-plus-circle"></i> 質問を投稿する
+                    <input type="text" class="flex-grow-1 form-control border-0 shadow-none px-4"
+                        placeholder="質問を検索...">
+                    <button type="button"
+                        class="btn text-white bg-success-soft rounded-pill px-2 px-md-5 py-2 py-md-3 fw-bold flex-shrink-0">
+                        <i class="bi bi-search"></i>
+                        <span class="d-none d-sm-inline ms-2">検索</span>
                     </button>
                 </div>
 
-                <div class="sidebar-card">
-                    <h5 class="fw-bold mb-4" style="color: var(--brown-color);">
-                        <i class="bi bi-trophy-fill text-warning"></i> 人気の質問
-                    </h5>
-                    <div class="ranking-item">
-                        <div class="ranking-number gold">1</div>
-                        <div>
-                            <h6 class="fw-bold mb-1 small">子犬のワクチン接種スケジュール</h6>
-                            <small class="text-muted">523人が参考にしました</small>
-                        </div>
-                    </div>
-                    <div class="ranking-item">
-                        <div class="ranking-number silver">2</div>
-                        <div>
-                            <h6 class="fw-bold mb-1 small">猫の発情期の対処法</h6>
-                            <small class="text-muted">487人が参考にしました</small>
-                        </div>
-                    </div>
-                    <div class="ranking-item">
-                        <div class="ranking-number bronze">3</div>
-                        <div>
-                            <h6 class="fw-bold mb-1 small">ハムスターの寿命について</h6>
-                            <small class="text-muted">412人が参考にしました</small>
-                        </div>
-                    </div>
-                </div>
             </div>
+
+            <div class="text-center mt-4">
+
+                <div class="d-flex justify-content-center gap-3 flex-wrap">
+                    <span class="d-flex align-items-center gap-2 bg-success-soft text-white p-3 rounded-4 fw-bold">
+                        <i class="bi bi-chat-left-text"></i>
+                        3,245件の質問</span>
+                    <span class="d-flex align-items-center gap-2 bg-success-soft text-white p-3 rounded-4 fw-bold">
+                        <i class="bi bi-people"></i> 12,890人の回答者</span>
+                    <span class="d-flex align-items-center gap-2 bg-success-soft text-white p-3 rounded-4 fw-bold">
+                        <i class="bi bi-check-circle"></i> 解決率 94%</span>
+                </div>
+
+            </div>
+
         </div>
+
     </div>
 
-    <footer>
+    <div class="container">
+
+        <!-- タブメニュー -->
+        <div class="bg-white rounded-4 p-3 shadow-sm mb-4">
+
+            <ul class="nav nav-pills justify-content-center gap-3 flex-wrap" id="categoryTabs" role="tablist">
+
+                <li class="nav-item" role="presentation">
+                    <button class="rounded-3 p-2 brown-color fw-bold m-1 border-0 active" data-bs-toggle="pill"
+                        data-bs-target="#all" type="button" role="tab">
+                        <i class=" bi bi-grid"></i> すべて
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="rounded-3 p-2 brown-color fw-bold m-1 border-0" data-bs-toggle="pill"
+                        data-bs-target="#dog" type="button" role="tab">
+                        <i class="bi bi-emoji-smile"></i> 犬
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="rounded-3 p-2 brown-color fw-bold m-1 border-0" data-bs-toggle="pill"
+                        data-bs-target="#cat" type="button" role="tab">
+                        <i class="bi bi-emoji-heart-eyes"></i> 猫
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="rounded-3 p-2 brown-color fw-bold m-1 border-0" data-bs-toggle="pill"
+                        data-bs-target="#s-animal" type="button" role="tab">
+                        <i class="bi bi-emoji-heart-eyes"></i> 小動物
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="rounded-3 p-2 brown-color fw-bold m-1 border-0 " data-bs-toggle="pill"
+                        data-bs-target="#health" type="button" role="tab">
+                        <i class="bi bi-heart-pulse"></i> 健康
+                    </button>
+                </li>
+
+            </ul>
+
+        </div>
+
+        <!-- タブコンテンツ -->
+        <div class="tab-content">
+
+            <!-- 全て -->
+            <div class="tab-pane fade show active" id="all">
+
+                <div class="row g-4">
+
+                    <div class="col-12 col-md-6">
+
+                        <div class="bg-white rounded-4 shadow-sm">
+
+                            <div class="bg-brown-color p-4 rounded-top-4 text-white fw-bold">
+                                <i class="bi bi-question-circle-fill text-white me-2"></i>
+                                子犬のトイレトレーニングがうまくいきません
+                            </div>
+
+
+                            <div class="p-3 p-md-5 bg-white">
+
+                                <div class="mb-4">
+                                    <span class="bg-secondary-subtle brown-color px-3 py-1 rounded-2 fw-bold">犬</span>
+                                    <span class="bg-secondary-subtle brown-color px-3 py-1 rounded-2 fw-bold">しつけ</span>
+                                </div>
+
+                                <div>
+                                    <h6 class="fw-bold text-success mb-2">
+                                        <i class="bi bi-check-circle-fill"></i> ベストアンサー
+                                    </h6>
+                                    <p>
+                                        トイレトレーニングは根気が必要です。
+                                        成功したら褒めること、失敗しても叱らないことが重要です。
+                                    </p>
+                                </div>
+
+                                <div class="d-flex flex-wrap gap-3 text-muted small mt-4">
+                                    <div class="d-flex align-items-center gap-1">
+                                        <i class="bi bi-person-circle"></i> ドッグトレーナー山田
+                                    </div>
+                                    <div class="d-flex align-items-center gap-1">
+                                        <i class="bi bi-hand-thumbs-up"></i> 312人が参考になった
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <button class="border-0 bg-white p-0 helpful-btn">
+                                        <i class="bi bi-hand-thumbs-up"></i>
+                                        <span>参考になった</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <div class="bg-white rounded-4 shadow-sm">
+
+                            <div>
+                                <div class="bg-brown-color p-4 rounded-top-4 text-white fw-bold">
+                                    <i class="bi bi-question-circle-fill text-white me-2"></i>
+                                    猫が急にご飯を食べなくなりました
+                                </div>
+                            </div>
+
+                            <div class="p-3 p-md-5 bg-white">
+
+                                <div class="mb-4">
+                                    <span class="bg-secondary-subtle brown-color px-3 py-1 rounded-2 fw-bold">猫</span>
+                                    <span class="bg-secondary-subtle brown-color px-3 py-1 rounded-2 fw-bold">健康</span>
+                                </div>
+
+                                <div>
+                                    <h6 class="fw-bold text-success mb-2">
+                                        <i class="bi bi-check-circle-fill"></i> ベストアンサー
+                                    </h6>
+                                    <p>24時間以上食事を取らない場合は早めに動物病院を受診してください。</p>
+                                </div>
+
+                                <div class="d-flex flex-wrap gap-3 text-muted small mt-4">
+                                    <div class="d-flex align-items-center gap-1">
+                                        <i class="bi bi-person-circle"></i><span>獣医師・佐藤</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-1">
+                                        <i class="bi bi-hand-thumbs-up"></i><span>487人が参考になった</span>
+                                    </div>
+                                </div>
+
+                                <div class="mt-3">
+                                    <button class="border-0 bg-white p-0 helpful-btn">
+                                        <i class="bi bi-hand-thumbs-up"></i>
+                                        <span>参考になった</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <div class="bg-white rounded-4 shadow-sm">
+
+                            <div>
+                                <div class="bg-brown-color p-4 rounded-top-4 text-white fw-bold">
+                                    <i class="bi bi-question-circle-fill text-white me-2"></i>
+                                    猫が急にご飯を食べなくなりました
+                                </div>
+                            </div>
+
+                            <div class="p-3 p-md-5 bg-white">
+
+                                <div class="mb-4">
+                                    <span class="bg-secondary-subtle brown-color px-3 py-1 rounded-2 fw-bold">猫</span>
+                                    <span class="bg-secondary-subtle brown-color px-3 py-1 rounded-2 fw-bold">健康</span>
+                                </div>
+
+                                <div>
+                                    <h6 class="fw-bold text-success mb-2">
+                                        <i class="bi bi-check-circle-fill"></i> ベストアンサー
+                                    </h6>
+                                    <p>24時間以上食事を取らない場合は早めに動物病院を受診してください。</p>
+                                </div>
+
+                                <div class="d-flex flex-wrap gap-3 text-muted small mt-4">
+                                    <div class="d-flex align-items-center gap-1">
+                                        <i class="bi bi-person-circle"></i><span>獣医師・佐藤</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-1">
+                                        <i class="bi bi-hand-thumbs-up"></i><span>487人が参考になった</span>
+                                    </div>
+                                </div>
+
+                                <div class="mt-3">
+                                    <button class="border-0 bg-white p-0 helpful-btn">
+                                        <i class="bi bi-hand-thumbs-up"></i>
+                                        <span>参考になった</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <div class="bg-white rounded-4 shadow-sm">
+
+                            <div>
+                                <div class="bg-brown-color p-4 rounded-top-4 text-white fw-bold">
+                                    <i class="bi bi-question-circle-fill text-white me-2"></i>
+                                    猫が急にご飯を食べなくなりました
+                                </div>
+                            </div>
+
+                            <div class="p-3 p-md-5 bg-white">
+
+                                <div class="mb-4">
+                                    <span class="bg-secondary-subtle brown-color px-3 py-1 rounded-2 fw-bold">猫</span>
+                                    <span class="bg-secondary-subtle brown-color px-3 py-1 rounded-2 fw-bold">健康</span>
+                                </div>
+
+                                <div>
+                                    <h6 class="fw-bold text-success mb-2">
+                                        <i class="bi bi-check-circle-fill"></i> ベストアンサー
+                                    </h6>
+                                    <p>24時間以上食事を取らない場合は早めに動物病院を受診してください。</p>
+                                </div>
+
+                                <div class="d-flex flex-wrap gap-3 text-muted small mt-4">
+                                    <div class="d-flex align-items-center gap-1">
+                                        <i class="bi bi-person-circle"></i><span>獣医師・佐藤</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-1">
+                                        <i class="bi bi-hand-thumbs-up"></i><span>487人が参考になった</span>
+                                    </div>
+                                </div>
+
+                                <div class="mt-3">
+                                    <button class="border-0 bg-white p-0 helpful-btn">
+                                        <i class="bi bi-hand-thumbs-up"></i>
+                                        <span>参考になった</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <div class="bg-white rounded-4 shadow-sm">
+
+                            <div>
+                                <div class="bg-brown-color p-4 rounded-top-4 text-white fw-bold">
+                                    <i class="bi bi-question-circle-fill text-white me-2"></i>
+                                    猫が急にご飯を食べなくなりました
+                                </div>
+                            </div>
+
+                            <div class="p-3 p-md-5 bg-white">
+
+                                <div class="mb-4">
+                                    <span class="bg-secondary-subtle brown-color px-3 py-1 rounded-2 fw-bold">猫</span>
+                                    <span class="bg-secondary-subtle brown-color px-3 py-1 rounded-2 fw-bold">健康</span>
+                                </div>
+
+                                <div>
+                                    <h6 class="fw-bold text-success mb-2">
+                                        <i class="bi bi-check-circle-fill"></i> ベストアンサー
+                                    </h6>
+                                    <p>24時間以上食事を取らない場合は早めに動物病院を受診してください。</p>
+                                </div>
+
+                                <div class="d-flex flex-wrap gap-3 text-muted small mt-4">
+                                    <div class="d-flex align-items-center gap-1">
+                                        <i class="bi bi-person-circle"></i><span>獣医師・佐藤</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-1">
+                                        <i class="bi bi-hand-thumbs-up"></i><span>487人が参考になった</span>
+                                    </div>
+                                </div>
+
+                                <div class="mt-3">
+                                    <button class="border-0 bg-white p-0 helpful-btn">
+                                        <i class="bi bi-hand-thumbs-up"></i>
+                                        <span>参考になった</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <div class="bg-white rounded-4 shadow-sm">
+
+                            <div>
+                                <div class="bg-brown-color p-4 rounded-top-4 text-white fw-bold">
+                                    <i class="bi bi-question-circle-fill text-white me-2"></i>
+                                    猫が急にご飯を食べなくなりました
+                                </div>
+                            </div>
+
+                            <div class="p-3 p-md-5 bg-white">
+
+                                <div class="mb-4">
+                                    <span class="bg-secondary-subtle brown-color px-3 py-1 rounded-2 fw-bold">猫</span>
+                                    <span class="bg-secondary-subtle brown-color px-3 py-1 rounded-2 fw-bold">健康</span>
+                                </div>
+
+                                <div>
+                                    <h6 class="fw-bold text-success mb-2">
+                                        <i class="bi bi-check-circle-fill"></i> ベストアンサー
+                                    </h6>
+                                    <p>24時間以上食事を取らない場合は早めに動物病院を受診してください。</p>
+                                </div>
+
+                                <div class="d-flex flex-wrap gap-3 text-muted small mt-4">
+                                    <div class="d-flex align-items-center gap-1">
+                                        <i class="bi bi-person-circle"></i><span>獣医師・佐藤</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-1">
+                                        <i class="bi bi-hand-thumbs-up"></i><span>487人が参考になった</span>
+                                    </div>
+                                </div>
+
+                                <div class="mt-3">
+                                    <button class="border-0 bg-white p-0 helpful-btn">
+                                        <i class="bi bi-hand-thumbs-up"></i>
+                                        <span>参考になった</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- タブが犬の場合 -->
+            <div class="tab-pane fade" id="dog">
+
+                <div class="row g-4">
+
+                    <div class="col-12 col-md-6">
+
+                        <div class="bg-white rounded-4 shadow-sm">
+
+                            <div class="bg-brown-color p-4 rounded-top-4 text-white fw-bold">
+                                <i class="bi bi-question-circle-fill text-white me-2"></i>
+                                子犬のトイレトレーニングがうまくいきません
+                            </div>
+
+
+                            <div class="p-3 p-md-5 bg-white">
+
+                                <div class="mb-4">
+                                    <span class="bg-secondary-subtle brown-color px-3 py-1 rounded-2 fw-bold">犬</span>
+                                    <span class="bg-secondary-subtle brown-color px-3 py-1 rounded-2 fw-bold">しつけ</span>
+                                </div>
+
+                                <div>
+                                    <h6 class="fw-bold text-success mb-2">
+                                        <i class="bi bi-check-circle-fill"></i> ベストアンサー
+                                    </h6>
+                                    <p>
+                                        トイレトレーニングは根気が必要です。
+                                        成功したら褒めること、失敗しても叱らないことが重要です。
+                                    </p>
+                                </div>
+
+                                <div class="d-flex flex-wrap gap-3 text-muted small mt-4">
+                                    <div class="d-flex align-items-center gap-1">
+                                        <i class="bi bi-person-circle"></i> ドッグトレーナー山田
+                                    </div>
+                                    <div class="d-flex align-items-center gap-1">
+                                        <i class="bi bi-hand-thumbs-up"></i> 312人が参考になった
+                                    </div>
+                                </div>
+
+                                <div class="mt-3">
+                                    <button class="border-0 bg-white p-0 helpful-btn">
+                                        <i class="bi bi-hand-thumbs-up"></i>
+                                        <span>参考になった</span>
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-12 col-md-6">
+
+                        <div class="bg-white rounded-4 shadow-sm">
+
+                            <div>
+                                <div class="bg-brown-color p-4 rounded-top-4 text-white fw-bold">
+                                    <i class="bi bi-question-circle-fill text-white me-2"></i>
+                                    猫が急にご飯を食べなくなりました
+                                </div>
+                            </div>
+
+                            <div class="p-3 p-md-5 bg-white">
+
+                                <div class="mb-4">
+                                    <span class="bg-secondary-subtle brown-color px-3 py-1 rounded-2 fw-bold">猫</span>
+                                    <span class="bg-secondary-subtle brown-color px-3 py-1 rounded-2 fw-bold">健康</span>
+                                </div>
+
+                                <div>
+                                    <h6 class="fw-bold text-success mb-2">
+                                        <i class="bi bi-check-circle-fill"></i> ベストアンサー
+                                    </h6>
+                                    <p>24時間以上食事を取らない場合は早めに動物病院を受診してください。</p>
+                                </div>
+
+                                <div class="d-flex flex-wrap gap-3 text-muted small mt-4">
+                                    <div class="d-flex align-items-center gap-1">
+                                        <i class="bi bi-person-circle"></i><span>獣医師・佐藤</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-1">
+                                        <i class="bi bi-hand-thumbs-up"></i><span>487人が参考になった</span>
+                                    </div>
+                                </div>
+
+                                <div class="mt-3">
+                                    <button class="border-0 bg-white p-0 helpful-btn">
+                                        <i class="bi bi-hand-thumbs-up"></i>
+                                        <span>参考になった</span>
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- タブが猫の場合 -->
+            <div class="tab-pane fade" id="cat">
+
+                <div class="row g-4">
+
+                    <div class="col-12 col-md-6">
+
+                        <div class="bg-white rounded-4 shadow-sm">
+
+                            <div class="bg-brown-color p-4 rounded-top-4 text-white fw-bold">
+                                <i class="bi bi-question-circle-fill text-white me-2"></i>
+                                子犬のトイレトレーニングがうまくいきません
+                            </div>
+
+
+                            <div class="p-3 p-md-5 bg-white">
+
+                                <div class="mb-4">
+                                    <span class="bg-secondary-subtle brown-color px-3 py-1 rounded-2 fw-bold">犬</span>
+                                    <span class="bg-secondary-subtle brown-color px-3 py-1 rounded-2 fw-bold">しつけ</span>
+                                </div>
+
+                                <div>
+                                    <h6 class="fw-bold text-success mb-2">
+                                        <i class="bi bi-check-circle-fill"></i> ベストアンサー
+                                    </h6>
+                                    <p>
+                                        トイレトレーニングは根気が必要です。
+                                        成功したら褒めること、失敗しても叱らないことが重要です。
+                                    </p>
+                                </div>
+
+                                <div class="d-flex flex-wrap gap-3 text-muted small mt-4">
+                                    <div class="d-flex align-items-center gap-1">
+                                        <i class="bi bi-person-circle"></i> ドッグトレーナー山田
+                                    </div>
+                                    <div class="d-flex align-items-center gap-1">
+                                        <i class="bi bi-hand-thumbs-up"></i> 312人が参考になった
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <button class="border-0 bg-white p-0 helpful-btn">
+                                        <i class="bi bi-hand-thumbs-up"></i>
+                                        <span>参考になった</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+
+                        <div class="bg-white rounded-4 shadow-sm">
+
+                            <div>
+                                <div class="bg-brown-color p-4 rounded-top-4 text-white fw-bold">
+                                    <i class="bi bi-question-circle-fill text-white me-2"></i>
+                                    猫が急にご飯を食べなくなりました
+                                </div>
+                            </div>
+
+                            <div class="p-3 p-md-5 bg-white">
+
+                                <div class="mb-4">
+                                    <span class="bg-secondary-subtle brown-color px-3 py-1 rounded-2 fw-bold">猫</span>
+                                    <span class="bg-secondary-subtle brown-color px-3 py-1 rounded-2 fw-bold">健康</span>
+                                </div>
+
+                                <div>
+                                    <h6 class="fw-bold text-success mb-2">
+                                        <i class="bi bi-check-circle-fill"></i> ベストアンサー
+                                    </h6>
+                                    <p>24時間以上食事を取らない場合は早めに動物病院を受診してください。</p>
+                                </div>
+
+                                <div class="d-flex flex-wrap gap-3 text-muted small mt-4">
+                                    <div class="d-flex align-items-center gap-1">
+                                        <i class="bi bi-person-circle"></i><span>獣医師・佐藤</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-1">
+                                        <i class="bi bi-hand-thumbs-up"></i><span>487人が参考になった</span>
+                                    </div>
+                                </div>
+
+                                <div class="mt-3">
+                                    <button class="border-0 bg-white p-0 helpful-btn">
+                                        <i class="bi bi-hand-thumbs-up"></i>
+                                        <span>参考になった</span>
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- タブが小動物の場合 -->
+            <div class="tab-pane fade" id="s-animal">
+
+                <div class="row g-4">
+
+                    <div class="col-12 col-md-6">
+
+                        <div class="bg-white rounded-4 shadow-sm">
+
+                            <div class="bg-brown-color p-4 rounded-top-4 text-white fw-bold">
+                                <i class="bi bi-question-circle-fill text-white me-2"></i>
+                                子犬のトイレトレーニングがうまくいきません
+                            </div>
+
+
+                            <div class="p-3 p-md-5 bg-white">
+
+                                <div class="mb-4">
+                                    <span class="bg-secondary-subtle brown-color px-3 py-1 rounded-2 fw-bold">犬</span>
+                                    <span class="bg-secondary-subtle brown-color px-3 py-1 rounded-2 fw-bold">しつけ</span>
+                                </div>
+
+                                <div>
+                                    <h6 class="fw-bold text-success mb-2">
+                                        <i class="bi bi-check-circle-fill"></i> ベストアンサー
+                                    </h6>
+                                    <p>
+                                        トイレトレーニングは根気が必要です。
+                                        成功したら褒めること、失敗しても叱らないことが重要です。
+                                    </p>
+                                </div>
+
+                                <div class="d-flex flex-wrap gap-3 text-muted small mt-4">
+                                    <div class="d-flex align-items-center gap-1">
+                                        <i class="bi bi-person-circle"></i> ドッグトレーナー山田
+                                    </div>
+                                    <div class="d-flex align-items-center gap-1">
+                                        <i class="bi bi-hand-thumbs-up"></i> 312人が参考になった
+                                    </div>
+                                </div>
+
+                                <div class="mt-3">
+                                    <button class="border-0 bg-white p-0 helpful-btn">
+                                        <i class="bi bi-hand-thumbs-up"></i>
+                                        <span>参考になった</span>
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-12 col-md-6">
+
+                        <div class="bg-white rounded-4 shadow-sm">
+
+                            <div>
+                                <div class="bg-brown-color p-4 rounded-top-4 text-white fw-bold">
+                                    <i class="bi bi-question-circle-fill text-white me-2"></i>
+                                    猫が急にご飯を食べなくなりました
+                                </div>
+                            </div>
+
+                            <div class="p-3 p-md-5 bg-white">
+
+                                <div class="mb-4">
+                                    <span class="bg-secondary-subtle brown-color px-3 py-1 rounded-2 fw-bold">猫</span>
+                                    <span class="bg-secondary-subtle brown-color px-3 py-1 rounded-2 fw-bold">健康</span>
+                                </div>
+
+                                <div>
+                                    <h6 class="fw-bold text-success mb-2">
+                                        <i class="bi bi-check-circle-fill"></i> ベストアンサー
+                                    </h6>
+                                    <p>24時間以上食事を取らない場合は早めに動物病院を受診してください。</p>
+                                </div>
+
+                                <div class="d-flex flex-wrap gap-3 text-muted small mt-4">
+                                    <div class="d-flex align-items-center gap-1">
+                                        <i class="bi bi-person-circle"></i><span>獣医師・佐藤</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-1">
+                                        <i class="bi bi-hand-thumbs-up"></i><span>487人が参考になった</span>
+                                    </div>
+                                </div>
+
+                                <div class="mt-3">
+                                    <button class="border-0 bg-white p-0 helpful-btn">
+                                        <i class="bi bi-hand-thumbs-up"></i>
+                                        <span>参考になった</span>
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- タブが健康の場合 -->
+            <div class="tab-pane fade" id="health">
+
+                <div class="row g-4">
+
+                    <div class="col-12 col-md-6">
+
+                        <div class="bg-white rounded-4 shadow-sm">
+
+                            <div class="bg-brown-color p-4 rounded-top-4 text-white fw-bold">
+                                <i class="bi bi-question-circle-fill text-white me-2"></i>
+                                子犬のトイレトレーニングがうまくいきません
+                            </div>
+
+
+                            <div class="p-3 p-md-5 bg-white">
+
+                                <div class="mb-4">
+                                    <span class="bg-secondary-subtle brown-color px-3 py-1 rounded-2 fw-bold">犬</span>
+                                    <span class="bg-secondary-subtle brown-color px-3 py-1 rounded-2 fw-bold">しつけ</span>
+                                </div>
+
+                                <div>
+                                    <h6 class="fw-bold text-success mb-2">
+                                        <i class="bi bi-check-circle-fill"></i> ベストアンサー
+                                    </h6>
+                                    <p>
+                                        トイレトレーニングは根気が必要です。
+                                        成功したら褒めること、失敗しても叱らないことが重要です。
+                                    </p>
+                                </div>
+
+                                <div class="d-flex flex-wrap gap-3 text-muted small mt-4">
+                                    <div class="d-flex align-items-center gap-1">
+                                        <i class="bi bi-person-circle"></i> ドッグトレーナー山田
+                                    </div>
+                                    <div class="d-flex align-items-center gap-1">
+                                        <i class="bi bi-hand-thumbs-up"></i> 312人が参考になった
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <button class="border-0 bg-white p-0 helpful-btn">
+                                        <i class="bi bi-hand-thumbs-up"></i>
+                                        <span>参考になった</span>
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-12 col-md-6">
+
+                        <div class="bg-white rounded-4 shadow-sm">
+
+                            <div>
+                                <div class="bg-brown-color p-4 rounded-top-4 text-white fw-bold">
+                                    <i class="bi bi-question-circle-fill text-white me-2"></i>
+                                    猫が急にご飯を食べなくなりました
+                                </div>
+                            </div>
+
+                            <div class="p-3 p-md-5 bg-white">
+
+                                <div class="mb-4">
+                                    <span class="bg-secondary-subtle brown-color px-3 py-1 rounded-2 fw-bold">猫</span>
+                                    <span class="bg-secondary-subtle brown-color px-3 py-1 rounded-2 fw-bold">健康</span>
+                                </div>
+
+                                <div>
+                                    <h6 class="fw-bold text-success mb-2">
+                                        <i class="bi bi-check-circle-fill"></i> ベストアンサー
+                                    </h6>
+                                    <p>24時間以上食事を取らない場合は早めに動物病院を受診してください。</p>
+                                </div>
+
+                                <div class="d-flex flex-wrap gap-3 text-muted small mt-4">
+                                    <div class="d-flex align-items-center gap-1">
+                                        <i class="bi bi-person-circle"></i><span>獣医師・佐藤</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-1">
+                                        <i class="bi bi-hand-thumbs-up"></i><span>487人が参考になった</span>
+                                    </div>
+                                </div>
+
+                                <div class="mt-3">
+                                    <button class="border-0 bg-white p-0 helpful-btn">
+                                        <i class="bi bi-hand-thumbs-up"></i>
+                                        <span>参考になった</span>
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <hr class="my-5 opacity-50">
+
+        <div class="row mt-3 mt-lg-5 mb-5">
+
+            <!-- 質問投稿 -->
+            <div class="col-lg-5">
+
+                <div class="card border-0 h-100">
+
+                    <div class="card-body d-flex flex-column justify-content-center align-items-center p-4">
+
+                        <div class="d-flex align-items-center gap-4 justify-content-center">
+                            <i class="bi bi-chat-dots-fill fs-1 text-success mb-3"></i>
+
+                            <h5 class="fw-bold brown-color">
+                                わからないことを質問しよう
+                            </h5>
+                        </div>
+
+
+                        <p class="text-muted small mb-4">
+                            専門家や詳しい人が
+                            やさしく答えてくれます
+                        </p>
+
+                        <a href="#" class="btn btn-success rounded-pill py-2 fw-bold w-50">
+                            <i class="bi bi-plus-circle me-1"></i> 質問を投稿する
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- 人気の質問 -->
+            <div class="col-lg-7 mt-3 mt-lg-0">
+
+                <div class="card border-0 h-100">
+
+                    <div class="card-body p-4">
+
+                        <h5 class="fw-bold mb-4 brown-color">
+                            <i class=" bi bi-trophy-fill text-warning"></i> 人気の質問
+                        </h5>
+
+                        <div class="d-flex align-items-center mb-3">
+
+                            <div class="badge bg-warning text-dark rounded-circle me-3 fs-6">1</div>
+
+                            <div>
+                                <a href="#" class="fw-bold text-decoration-none">
+                                    子犬のワクチン接種スケジュール
+                                </a>
+                                <small class="text-muted m-lg-3">
+                                    523人が参考にしました
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-center mb-3">
+
+                            <div class="badge bg-warning text-dark rounded-circle me-3 fs-6">2</div>
+
+                            <div>
+                                <a href="#" class="fw-bold text-decoration-none">猫の発情期の対処法</a>
+                                <small class="text-muted m-lg-3">487人が参考にしました</small>
+                            </div>
+
+                        </div>
+
+                        <div class="d-flex align-items-center mb-3">
+
+                            <div class="badge bg-warning text-dark rounded-circle me-3 fs-6">3</div>
+
+                            <div>
+                                <a href="#" class="fw-bold text-decoration-none">ハムスターの寿命について</a>
+                                <small class="text-muted m-lg-3">412人が参考にしました</small>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- フッター -->
+    <footer class="text-white p-2 p-md-5">
         <div class="container">
-            <div class="row">
-                <div class="col-md-4 mb-4">
-                    <h5 class="fw-bold mb-3">
+            <div class="row mt-3">
+                <div class="col-md-5 mb-4">
+                    <h5 class="fw-bold mb-4">
                         <i class="bi bi-heart-fill text-danger"></i> PetLife
                     </h5>
                     <p>ペットとの幸せな暮らしを応援する情報サイト</p>
                 </div>
                 <div class="col-md-2 mb-4">
-                    <h6 class="fw-bold mb-3">サイト情報</h6>
+                    <h6 class="fw-bold mb-4">サイト情報</h6>
                     <ul class="list-unstyled">
                         <li><a href="#" class="text-white text-decoration-none">About</a></li>
                         <li><a href="#" class="text-white text-decoration-none">利用規約</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">プライバシー</a></li>
                     </ul>
                 </div>
                 <div class="col-md-2 mb-4">
-                    <h6 class="fw-bold mb-3">サポート</h6>
+                    <h6 class="fw-bold mb-4">サポート</h6>
                     <ul class="list-unstyled">
                         <li><a href="#" class="text-white text-decoration-none">ヘルプ</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">お問い合わせ</a></li>
                         <li><a href="#" class="text-white text-decoration-none">FAQ</a></li>
                     </ul>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <h6 class="fw-bold mb-3">フォローする</h6>
+                <div class="col-md-2 mb-4">
+                    <h6 class="fw-bold mb-4">フォローする</h6>
                     <div class="d-flex gap-3">
                         <a href="#" class="text-white fs-4"><i class="bi bi-twitter"></i></a>
                         <a href="#" class="text-white fs-4"><i class="bi bi-instagram"></i></a>
@@ -513,21 +992,15 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
-        document.querySelectorAll('.helpful-btn').forEach(button => {
-            button.addEventListener('click', function () {
-                if (this.innerHTML.includes('参考になった')) {
-                    this.innerHTML = '<i class="bi bi-hand-thumbs-up-fill"></i> 参考になりました';
-                    this.style.background = 'var(--primary-color)';
-                    this.style.color = 'white';
-                } else {
-                    this.innerHTML = '<i class="bi bi-hand-thumbs-up"></i> 参考になった';
-                    this.style.background = 'transparent';
-                    this.style.color = 'var(--primary-color)';
-                }
+        document.querySelectorAll('.helpful-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.classList.toggle('active');
             });
         });
     </script>
+
 </body>
 
 </html>

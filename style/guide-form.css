@@ -1,0 +1,62 @@
+.form-section {
+  border-bottom: 2px solid #f3f4f6;
+}
+
+.category-label {
+  transition: all 0.2s ease;
+}
+
+.category-label:hover {
+  background-color: #f9fafb;
+}
+
+input[type="radio"]:checked + .category-label {
+  background-color: #ecfdf5;
+  border-color: #10b981;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.15);
+}
+
+.mood-option {
+  transition: all 0.2s ease;
+}
+
+.mood-option:hover {
+  background-color: #f3f4f6;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.mood-option.active {
+  background-color: var(--accent-color);
+  border-radius: 50%;
+  transform: scale(1.15);
+}
+
+.suggested-tag {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.suggested-tag:hover {
+  border-color: var(--primary-color);
+  background: var(--accent-color);
+}
+
+.btn-draft {
+  transition: all 0.3s ease;
+}
+
+.btn-draft:hover {
+  color: white;
+  background-color: var(--brown-color);
+}
+
+/* Toast通知スタイル */
+.toast-container {
+  top: 80px;
+  right: 20px;
+}
+
+.toast-custom {
+  min-width: 350px;
+}

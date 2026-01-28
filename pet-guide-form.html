@@ -5,778 +5,402 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PetLife - 飼育記録を投稿</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="icon" href="/img/nikukyu_kuro.png" type="image/png">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    <style>
-        :root {
-            --primary-color: #10b981;
-            --secondary-color: #f59e0b;
-            --accent-color: #fb923c;
-            --brown-color: #78350f;
-        }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #fef3c7;
-        }
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style/style.css">
 
-        .navbar {
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
+    <!-- guide-form Styles  -->
+    <link rel="stylesheet" href="style/guide-form.css">
 
-        .navbar-brand {
-            font-weight: bold;
-            color: var(--primary-color) !important;
-            font-size: 1.5rem;
-        }
-
-        .nav-link {
-            color: var(--brown-color) !important;
-            font-weight: 500;
-            margin: 0 10px;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--primary-color) !important;
-        }
-
-        .page-header {
-            background: linear-gradient(135deg, #dcfce7 0%, #fed7aa 100%);
-            padding: 60px 0;
-            border-radius: 0 0 50px 50px;
-            margin-bottom: 40px;
-        }
-
-        .form-container {
-            background: white;
-            border-radius: 30px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
-        }
-
-        .form-section {
-            margin-bottom: 35px;
-            padding-bottom: 35px;
-            border-bottom: 2px solid #f3f4f6;
-        }
-
-        .form-section:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .section-title {
-            color: var(--brown-color);
-            font-weight: 700;
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .section-title i {
-            color: var(--primary-color);
-        }
-
-        .form-label {
-            font-weight: 600;
-            color: var(--brown-color);
-            margin-bottom: 8px;
-        }
-
-        .required-mark {
-            color: #ef4444;
-            margin-left: 3px;
-        }
-
-        .form-control,
-        .form-select {
-            border: 2px solid #e5e7eb;
-            border-radius: 15px;
-            padding: 12px 18px;
-            transition: all 0.3s ease;
-        }
-
-        .form-control:focus,
-        .form-select:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 0.2rem rgba(16, 185, 129, 0.15);
-        }
-
-        .form-control::placeholder {
-            color: #9ca3af;
-        }
-
-        textarea.form-control {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .category-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-        }
-
-        .category-option {
-            position: relative;
-        }
-
-        .category-option input[type="radio"] {
-            position: absolute;
-            opacity: 0;
-        }
-
-        .category-label {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            border: 2px solid #e5e7eb;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: white;
-            text-align: center;
-        }
-
-        .category-label i {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-
-        .category-label:hover {
-            border-color: var(--primary-color);
-            background: rgba(16, 185, 129, 0.05);
-        }
-
-        .category-option input[type="radio"]:checked+.category-label {
-            border-color: var(--primary-color);
-            background: linear-gradient(135deg, #dcfce7, #fed7aa);
-            font-weight: 700;
-        }
-
-        .file-upload-area {
-            border: 2px dashed #e5e7eb;
-            border-radius: 20px;
-            padding: 40px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: #fafafa;
-        }
-
-        .file-upload-area:hover {
-            border-color: var(--primary-color);
-            background: rgba(16, 185, 129, 0.05);
-        }
-
-        .file-upload-area i {
-            font-size: 3rem;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-
-        .upload-text {
-            color: var(--brown-color);
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .upload-hint {
-            color: #9ca3af;
-            font-size: 0.9rem;
-        }
-
-        .image-preview-container {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-
-        .image-preview {
-            position: relative;
-            width: 120px;
-            height: 120px;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .image-preview img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .image-preview .remove-btn {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background: rgba(239, 68, 68, 0.9);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .image-preview .remove-btn:hover {
-            background: #dc2626;
-        }
-
-        .date-input-group {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .date-input-group input {
-            flex: 1;
-        }
-
-        .quick-date-btn {
-            padding: 10px 20px;
-            border: 2px solid var(--primary-color);
-            background: white;
-            color: var(--primary-color);
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-        }
-
-        .quick-date-btn:hover {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .btn-submit {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border: none;
-            color: white;
-            padding: 15px 50px;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-        }
-
-        .btn-submit:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
-        }
-
-        .btn-draft {
-            background: white;
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-            padding: 15px 50px;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-        }
-
-        .btn-draft:hover {
-            background: rgba(16, 185, 129, 0.1);
-        }
-
-        .help-text {
-            color: #6b7280;
-            font-size: 0.9rem;
-            margin-top: 5px;
-        }
-
-        .info-card {
-            background: linear-gradient(135deg, #dcfce7, #fed7aa);
-            border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 30px;
-        }
-
-        .info-card-title {
-            font-weight: 700;
-            color: var(--brown-color);
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-        }
-
-        .info-card ul {
-            margin-bottom: 0;
-            padding-left: 20px;
-        }
-
-        .info-card li {
-            color: var(--brown-color);
-            margin-bottom: 8px;
-        }
-
-        footer {
-            background-color: var(--brown-color);
-            color: white;
-            padding: 40px 0;
-            margin-top: 80px;
-            border-radius: 50px 50px 0 0;
-        }
-
-        /* Toast通知スタイル */
-        .toast-container {
-            position: fixed;
-            top: 80px;
-            right: 20px;
-            z-index: 9999;
-        }
-
-        .toast-custom {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            border: none;
-            min-width: 350px;
-        }
-
-        .toast-custom .toast-header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border-radius: 20px 20px 0 0;
-            border: none;
-            padding: 15px 20px;
-        }
-
-        .toast-custom .toast-body {
-            padding: 20px;
-            color: var(--brown-color);
-        }
-
-        .mood-selector {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-        }
-
-        .mood-option {
-            cursor: pointer;
-            font-size: 2.5rem;
-            opacity: 0.3;
-            transition: all 0.3s ease;
-        }
-
-        .mood-option:hover,
-        .mood-option.active {
-            opacity: 1;
-            transform: scale(1.2);
-        }
-
-        .tag-input-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            padding: 10px;
-            border: 2px solid #e5e7eb;
-            border-radius: 15px;
-            min-height: 50px;
-        }
-
-        .tag-item {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 6px 15px;
-            border-radius: 50px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .tag-item .remove-tag {
-            cursor: pointer;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            width: 18px;
-            height: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-        }
-
-        .tag-item .remove-tag:hover {
-            background: rgba(255, 255, 255, 0.5);
-        }
-
-        .tag-input-field {
-            flex: 1;
-            border: none;
-            outline: none;
-            min-width: 100px;
-            padding: 5px;
-        }
-
-        .suggested-tags {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-top: 10px;
-        }
-
-        .suggested-tag {
-            background: white;
-            border: 2px solid #e5e7eb;
-            color: var(--brown-color);
-            padding: 5px 12px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .suggested-tag:hover {
-            border-color: var(--primary-color);
-            background: rgba(16, 185, 129, 0.1);
-        }
-    </style>
 </head>
 
 <body>
+
     <!-- ナビゲーションバー -->
-    <nav class="navbar navbar-expand-lg sticky-top">
+    <nav class="navbar navbar-expand-lg sticky-top bg-white shadow-sm">
+
         <div class="container">
-            <a class="navbar-brand" href="#">
+
+            <!-- ブランドロゴ -->
+            <a class="navbar-brand fw-bold fs-4" href="/index.html">
                 <i class="bi bi-heart-fill text-danger"></i> PetLife
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+
+            <!-- ハンバーガーメニュー -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-label="ナビゲーションメニューを開く">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
+            <!-- ナビゲーションメニュー -->
             <div class="collapse navbar-collapse" id="navbarNav">
+
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">ホーム</a>
+                        <a class="nav-link active" href="/index.html">ホーム</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">ペット図鑑</a>
+                        <a class="nav-link fw-normal" href="/pet-guide-list.html">ペット図鑑</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">飼い方ガイド</a>
+                        <a class="nav-link fw-normal" href="/pet-care-guide.html">飼い方ガイド</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Q&A</a>
+                        <a class="nav-link fw-normal" href="/pet-guide-qa.html">Q&A</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">飼育記録</a>
+                        <a class="nav-link fw-normal" href="/pet-guide-record.html">飼育記録</a>
+                    </li>
+                    <!-- ログインボタン -->
+                    <li class="nav-item">
+                        <a href="/pet-login.html"
+                            class="btn btn-outline-success ms-0 ms-lg-3 mt-2 mt-lg-0 rounded-pill fw-bold">
+                            <i class="bi bi-person-circle"></i> ログイン
+                        </a>
                     </li>
                 </ul>
-                <button class="btn btn-outline-success ms-3 rounded-pill fw-bold">
-                    <i class="bi bi-person-circle"></i> ログイン
-                </button>
+
             </div>
+
         </div>
+
     </nav>
 
-    <!-- ページヘッダー -->
-    <div class="page-header">
-        <div class="container">
-            <div class="text-center">
-                <h1 class="display-4 fw-bold mb-3" style="color: var(--brown-color);">
-                    <i class="bi bi-pencil-square"></i> 飼育記録を投稿
-                </h1>
-                <p class="lead" style="color: var(--brown-color);">
-                    今日のペットの様子を記録しましょう
-                </p>
-            </div>
-        </div>
-    </div>
-
     <div class="container">
-        <div class="row">
+
+        <div class="row mt-5">
+
             <!-- フォーム -->
             <div class="col-lg-8">
-                <div class="form-container">
+
+                <div class="form-container bg-white rounded-4 p-5 shadow-sm mb-3">
                     <form id="recordForm">
+
                         <!-- 基本情報 -->
-                        <div class="form-section">
-                            <h3 class="section-title">
+                        <div class="form-section mb-5 pb-5">
+
+                            <h3 class="brown-color fw-bold mb-3">
                                 <i class="bi bi-info-circle-fill"></i>
                                 基本情報
                             </h3>
 
                             <div class="mb-4">
-                                <label class="form-label">ペットを選択<span class="required-mark">*</span></label>
-                                <select class="form-select" required>
-                                    <option value="">選択してください</option>
-                                    <option value="moca" selected>モカ（柴犬・♀）</option>
-                                    <option value="maru">マル（アメリカンショートヘア・♂）</option>
-                                    <option value="hana">ハナ（ミニチュアダックス・♀）</option>
+                                <label class="fw-bold brown-color mb-3">ペットを選択<span
+                                        class="text-danger mx-2">*</span></label>
+                                <select class="form-select rounded-3 px-3 py-2 brown-color" required>
+                                    <option disabled selected>選択してください</option>
+                                    <option>モカ（柴犬・♀）</option>
+                                    <option>マル（アメリカンショートヘア・♂）</option>
+                                    <option>ハナ（ミニチュアダックス・♀）</option>
                                 </select>
                             </div>
 
                             <div class="mb-4">
-                                <label class="form-label">記録日時<span class="required-mark">*</span></label>
-                                <div class="date-input-group">
-                                    <input type="datetime-local" class="form-control" id="recordDate" required>
-                                    <button type="button" class="quick-date-btn" onclick="setToday()">
-                                        <i class="bi bi-calendar-check"></i> 今日
-                                    </button>
+                                <label class="fw-bold brown-color mb-3">記録日時<span
+                                        class="text-danger mx-2">*</span></label>
+                                <div class="d-flex g-3 align-items-center">
+                                    <input class="form-control px-3 py-2" placeholder="2026/01/01">
                                 </div>
-                                <div class="help-text">
+                                <div class="text-secondary small mt-1">
                                     <i class="bi bi-info-circle"></i> 記録した日時を入力してください
                                 </div>
                             </div>
 
                             <div class="mb-4">
-                                <label class="form-label">記録カテゴリ<span class="required-mark">*</span></label>
-                                <div class="category-options">
-                                    <div class="category-option">
-                                        <input type="radio" name="category" id="cat-checkup" value="checkup" required>
-                                        <label for="cat-checkup" class="category-label">
-                                            <i class="bi bi-hospital" style="color: #3b82f6;"></i>
+                                <label class="fw-bold brown-color mb-3">
+                                    記録カテゴリ<span class="text-danger mx-2">*</span>
+                                </label>
+
+                                <div class="row g-3">
+                                    <div class="col-12 col-md-6">
+                                        <input type="radio" name="category" id="cat-checkup" value="checkup" required
+                                            hidden>
+                                        <label for="cat-checkup"
+                                            class="category-label rounded-1 border-1 border p-3 w-100">
+                                            <i class="bi bi-hospital text-primary"></i>
                                             <span>健康診断</span>
                                         </label>
                                     </div>
-                                    <div class="category-option">
-                                        <input type="radio" name="category" id="cat-vaccine" value="vaccine">
-                                        <label for="cat-vaccine" class="category-label">
-                                            <i class="bi bi-shield-check" style="color: #f59e0b;"></i>
+
+                                    <div class="col-12 col-md-6">
+                                        <input type="radio" name="category" id="cat-vaccine" value="vaccine" hidden>
+                                        <label for="cat-vaccine"
+                                            class="category-label rounded-1 border-1 border p-3 w-100">
+                                            <i class="bi bi-shield-check text-warning"></i>
                                             <span>ワクチン</span>
                                         </label>
                                     </div>
-                                    <div class="category-option">
-                                        <input type="radio" name="category" id="cat-weight" value="weight">
-                                        <label for="cat-weight" class="category-label">
-                                            <i class="bi bi-speedometer2" style="color: #10b981;"></i>
+
+                                    <div class="col-12 col-md-6">
+                                        <input type="radio" name="category" id="cat-weight" value="weight" hidden>
+                                        <label for="cat-weight"
+                                            class="category-label rounded-1 border-1 border p-3 w-100">
+                                            <i class="bi bi-speedometer2 text-success"></i>
                                             <span>体重測定</span>
                                         </label>
                                     </div>
-                                    <div class="category-option">
-                                        <input type="radio" name="category" id="cat-medication" value="medication">
-                                        <label for="cat-medication" class="category-label">
-                                            <i class="bi bi-capsule" style="color: #ec4899;"></i>
+
+                                    <div class="col-12 col-md-6">
+                                        <input type="radio" name="category" id="cat-medication" value="medication"
+                                            hidden>
+                                        <label for="cat-medication"
+                                            class="category-label rounded-1 border-1 border p-3 w-100">
+                                            <i class="bi bi-capsule text-danger"></i>
                                             <span>投薬</span>
                                         </label>
                                     </div>
-                                    <div class="category-option">
-                                        <input type="radio" name="category" id="cat-daily" value="daily">
-                                        <label for="cat-daily" class="category-label">
-                                            <i class="bi bi-sun" style="color: #fb923c;"></i>
+
+                                    <div class="col-12 col-md-6">
+                                        <input type="radio" name="category" id="cat-daily" value="daily" hidden>
+                                        <label for="cat-daily"
+                                            class="category-label rounded-1 border-1 border p-3 w-100">
+                                            <i class="bi bi-sun text-warning"></i>
                                             <span>日常記録</span>
                                         </label>
                                     </div>
-                                    <div class="category-option">
-                                        <input type="radio" name="category" id="cat-other" value="other">
-                                        <label for="cat-other" class="category-label">
-                                            <i class="bi bi-three-dots" style="color: #6b7280;"></i>
+
+                                    <div class="col-12 col-md-6">
+                                        <input type="radio" name="category" id="cat-other" value="other" hidden>
+                                        <label for="cat-other"
+                                            class="category-label rounded-1 border-1 border p-3 w-100">
+                                            <i class="bi bi-three-dots text-secondary"></i>
                                             <span>その他</span>
                                         </label>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
 
                         <!-- 記録内容 -->
-                        <div class="form-section">
-                            <h3 class="section-title">
+                        <div class="form-section mb-5 pb-5">
+
+                            <h3 class="brown-color fw-bold mb-3">
                                 <i class="bi bi-chat-left-text-fill"></i>
                                 記録内容
                             </h3>
 
                             <div class="mb-4">
-                                <label class="form-label">タイトル<span class="required-mark">*</span></label>
-                                <input type="text" class="form-control" placeholder="例：定期健康診断、朝の散歩" required>
-                                <div class="help-text">
+                                <label class="fw-bold brown-color mb-3">タイトル<span
+                                        class="text-danger mx-2">*</span></label>
+                                <input type="text" class="form-control px-3 py-2" placeholder="例：定期健康診断、朝の散歩" required>
+                                <div class="text-secondary small mt-1">
                                     <i class="bi bi-lightbulb"></i> 簡潔でわかりやすいタイトルをつけましょう
                                 </div>
                             </div>
 
                             <div class="mb-4">
-                                <label class="form-label">詳細内容<span class="required-mark">*</span></label>
-                                <textarea class="form-control" placeholder="今日のペットの様子や気づいたことを記録してください..."
+                                <label class="fw-bold brown-color mb-3">詳細内容<span
+                                        class="text-danger mx-2">*</span></label>
+                                <textarea class="form-control px-3 py-2" placeholder="今日のペットの様子や気づいたことを記録してください..."
                                     required></textarea>
-                                <div class="help-text">
+                                <div class="text-secondary small mt-1">
                                     <i class="bi bi-chat-quote"></i> 健康状態、行動、食事、気づいたことなどを詳しく記録しましょう
                                 </div>
                             </div>
 
                             <div class="mb-4">
-                                <label class="form-label">ペットの気分</label>
-                                <div class="mood-selector">
-                                    <span class="mood-option" data-mood="very-happy" title="とても元気">😄</span>
-                                    <span class="mood-option" data-mood="happy" title="元気">😊</span>
-                                    <span class="mood-option active" data-mood="normal" title="普通">😐</span>
-                                    <span class="mood-option" data-mood="tired" title="疲れ気味">😔</span>
-                                    <span class="mood-option" data-mood="sick" title="体調不良">😷</span>
+                                <label class="fw-bold brown-color mb-3">ペットの気分</label>
+                                <div class="d-flex justify-content-center gap-3 flex-wrap">
+                                    <span class="mood-option fs-1 p-3">😄</span>
+                                    <span class="mood-option fs-1 p-3">😊</span>
+                                    <span class="mood-option fs-1 p-3 active">😐</span>
+                                    <span class="mood-option fs-1 p-3">😔</span>
+                                    <span class="mood-option fs-1 p-3">😷</span>
                                 </div>
-                                <div class="help-text text-center mt-2">
+                                <div class="text-secondary small mt-1 text-center mt-2">
                                     クリックしてペットの気分を選択
                                 </div>
                             </div>
+
                         </div>
 
                         <!-- 測定値 -->
-                        <div class="form-section">
-                            <h3 class="section-title">
+                        <div class="form-section mb-5 pb-5">
+
+                            <h3 class="brown-color fw-bold mb-3">
                                 <i class="bi bi-graph-up-arrow"></i>
                                 測定値（任意）
                             </h3>
 
                             <div class="row">
+
                                 <div class="col-md-6 mb-4">
-                                    <label class="form-label">体重</label>
+                                    <label class="fw-bold brown-color mb-3">体重</label>
                                     <div class="input-group">
                                         <input type="number" class="form-control" placeholder="8.5" step="0.1">
                                         <span class="input-group-text">kg</span>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
-                                    <label class="form-label">体温</label>
+                                    <label class="fw-bold brown-color mb-3">体温</label>
                                     <div class="input-group">
                                         <input type="number" class="form-control" placeholder="38.5" step="0.1">
                                         <span class="input-group-text">℃</span>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
-                                    <label class="form-label">水分摂取量</label>
+                                    <label class="fw-bold brown-color mb-3">水分摂取量</label>
                                     <div class="input-group">
                                         <input type="number" class="form-control" placeholder="750">
                                         <span class="input-group-text">ml</span>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
-                                    <label class="form-label">運動量（歩数）</label>
+                                    <label class="fw-bold brown-color mb-3">運動量（歩数）</label>
                                     <div class="input-group">
                                         <input type="number" class="form-control" placeholder="8500">
                                         <span class="input-group-text">歩</span>
                                     </div>
                                 </div>
+
                             </div>
+
                         </div>
 
                         <!-- 写真アップロード -->
-                        <div class="form-section">
-                            <h3 class="section-title">
+                        <div class="form-section mb-5 pb-5">
+
+                            <h3 class="brown-color fw-bold mb-3">
                                 <i class="bi bi-images"></i>
                                 写真を追加（任意）
                             </h3>
 
-                            <div class="file-upload-area" onclick="document.getElementById('fileInput').click()">
-                                <i class="bi bi-cloud-upload"></i>
-                                <div class="upload-text">クリックまたはドラッグ&ドロップで写真を追加</div>
-                                <div class="upload-hint">PNG, JPG, GIF（最大5MB、最大10枚まで）</div>
-                                <input type="file" id="fileInput" multiple accept="image/*" style="display: none;"
-                                    onchange="previewImages(event)">
+                            <div class="file-upload-area border rounded-3 p-5 text-center bg-secondary-subtle"
+                                id="uploadArea" role="button">
+                                <i class="bi bi-cloud-upload fs-1 brown-color mb-3"></i>
+                                <div class="brown-color fw-bold mb-1">クリックまたはドラッグ&ドロップで写真を追加</div>
+                                <div class="text-secondary">PNG, JPG, GIF</div>
+
+                                <input type="file" class="d-none" id="photoInput" multiple accept="image/*">
                             </div>
 
-                            <div class="image-preview-container" id="imagePreviewContainer">
-                                <!-- プレビュー画像がここに表示されます -->
-                            </div>
+                            <!-- プレビュー -->
+                            <div class="row g-3 mt-3" id="previewContainer"></div>
                         </div>
 
                         <!-- タグ -->
-                        <div class="form-section">
-                            <h3 class="section-title">
+                        <div class="form-section mb-5 pb-5">
+                            <h3 class="brown-color fw-bold mb-3">
                                 <i class="bi bi-tags-fill"></i>
                                 タグ（任意）
                             </h3>
 
                             <div class="mb-3">
-                                <label class="form-label">タグを追加</label>
-                                <div class="tag-input-container" id="tagContainer">
-                                    <input type="text" class="tag-input-field" id="tagInput" placeholder="タグを入力してEnter">
+                                <label class="fw-bold brown-color mb-3">タグを追加</label>
+
+                                <div class="d-flex g-3 align-items-center">
+                                    <input class="form-control px-3 py-2" placeholder="タグを入力してEnter">
                                 </div>
-                                <div class="help-text">
+
+                                <div class="text-secondary small mt-1">
                                     <i class="bi bi-info-circle"></i> Enterキーでタグを追加できます
                                 </div>
                             </div>
 
                             <div>
-                                <label class="form-label">おすすめタグ</label>
-                                <div class="suggested-tags">
-                                    <span class="suggested-tag" onclick="addTag('散歩')">#散歩</span>
-                                    <span class="suggested-tag" onclick="addTag('食事')">#食事</span>
-                                    <span class="suggested-tag" onclick="addTag('遊び')">#遊び</span>
-                                    <span class="suggested-tag" onclick="addTag('しつけ')">#しつけ</span>
-                                    <span class="suggested-tag" onclick="addTag('健康')">#健康</span>
-                                    <span class="suggested-tag" onclick="addTag('成長')">#成長</span>
+                                <label class="fw-bold brown-color mb-3">おすすめタグ</label>
+                                <div class="d-flex gap-3 flex-wrap mt-2">
+                                    <span class="suggested-tag border border-2 brown-color p-2 rounded-4">#散歩</span>
+                                    <span class="suggested-tag border border-2 brown-color p-2 rounded-4">#食事</span>
+                                    <span class="suggested-tag border border-2 brown-color p-2 rounded-4">#遊び</span>
+                                    <span class="suggested-tag border border-2 brown-color p-2 rounded-4">#しつけ</span>
+                                    <span class="suggested-tag border border-2 brown-color p-2 rounded-4">#健康</span>
+                                    <span class="suggested-tag border border-2 brown-color p-2 rounded-4">#成長</span>
                                 </div>
                             </div>
                         </div>
 
                         <!-- ボタン -->
                         <div class="text-center mt-4">
+
                             <div class="d-flex gap-3 justify-content-center flex-wrap">
-                                <button type="button" class="btn btn-draft" onclick="saveDraft()">
+
+                                <a href="#" onclick="showToast('draftToast'); return false;"
+                                    class="btn btn-draft border px-4 py-3 rounded-3 fw-bold d-flex align-items-center justify-content-center gap-1">
                                     <i class="bi bi-save"></i> 下書き保存
-                                </button>
-                                <button type="submit" class="btn btn-submit">
+                                </a>
+
+                                <a href="/pet-guide-record.html" class=" btn btn-draft border px-4 py-3 rounded-3 fw-bold d-flex align-items-center
+                                    justify-content-center gap-1">
                                     <i class="bi bi-check-circle"></i> 投稿する
-                                </button>
+                                </a>
+
                             </div>
+
                         </div>
+
                     </form>
                 </div>
             </div>
 
             <!-- サイドバー -->
             <div class="col-lg-4">
-                <div class="info-card">
-                    <h5 class="info-card-title">
+
+                <div class="info-card bg-gradient-soft rounded-4 p-4 mb-4">
+
+                    <h5 class="fw-bold brown-color mb-4">
                         <i class="bi bi-lightbulb-fill"></i> 記録のポイント
                     </h5>
-                    <ul>
-                        <li>毎日の健康状態を記録することで、変化に気づきやすくなります</li>
-                        <li>写真を添付すると、成長の記録が見返しやすくなります</li>
-                        <li>気になることは小さなことでもメモしておきましょう</li>
-                        <li>定期的な体重測定は健康管理に重要です</li>
+
+                    <ul class="mb-0 brown-color">
+                        <li class="mb-3">毎日の健康状態を記録することで、変化に気づきやすくなります</li>
+                        <li class="mb-3">写真を添付すると、成長の記録が見返しやすくなります</li>
+                        <li class="mb-3">気になることは小さなことでもメモしておきましょう</li>
+                        <li class="mb-3">定期的な体重測定は健康管理に重要です</li>
                     </ul>
+
                 </div>
 
-                <div class="info-card">
-                    <h5 class="info-card-title">
+                <div class="info-card bg-gradient-soft rounded-4 p-4 mb-4">
+
+                    <h5 class="fw-bold brown-color mb-4">
                         <i class="bi bi-bar-chart-line-fill"></i> 今月の記録状況
                     </h5>
+
                     <div class="mb-3">
-                        <div class="d-flex justify-content-between mb-2">
+
+                        <div class="d-flex justify-content-between mb-2 brown-color">
                             <span>記録日数</span>
-                            <strong style="color: var(--primary-color);">18日 / 20日</strong>
+                            <strong>18日 / 20日</strong>
                         </div>
-                        <div class="progress" style="height: 10px; border-radius: 10px;">
-                            <div class="progress-bar"
-                                style="width: 90%; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));">
+                        <div class="progress" style="height: 15px;">
+                            <div class="progress-bar bg-accent-soft" style="width: 90%;">
                             </div>
                         </div>
+
                     </div>
-                    <div class="text-center mt-3">
-                        <p class="mb-0" style="color: var(--brown-color);">
+
+                    <div class="text-center mt-3 brown-color">
+                        <p class="mb-0 fw-medium">
                             <i class="bi bi-trophy-fill text-warning"></i>
                             あと2日で目標達成！
                         </p>
                     </div>
+
                 </div>
 
-                <div class="info-card">
-                    <h5 class="info-card-title">
+                <div class="info-card bg-gradient-soft rounded-4 p-4 mb-2">
+
+                    <h5 class=" fw-bold brown-color mb-4">
                         <i class="bi bi-clock-history"></i> 最近の記録
                     </h5>
-                    <div class="small">
-                        <div class="d-flex justify-content-between mb-2 pb-2"
-                            style="border-bottom: 1px solid rgba(0,0,0,0.1);">
+
+                    <div class="small brown-color">
+
+                        <div class="d-flex justify-content-between mb-2 pb-2 border-bottom">
                             <span>体重測定</span>
                             <span class="text-muted">11/18</span>
                         </div>
-                        <div class="d-flex justify-content-between mb-2 pb-2"
-                            style="border-bottom: 1px solid rgba(0,0,0,0.1);">
+                        <div class="d-flex justify-content-between mb-2 pb-2 border-bottom">
                             <span>定期健診</span>
                             <span class="text-muted">11/10</span>
                         </div>
@@ -784,60 +408,60 @@
                             <span>投薬</span>
                             <span class="text-muted">11/05</span>
                         </div>
+
                     </div>
+
                 </div>
+
             </div>
+
         </div>
+
     </div>
 
     <!-- Toast通知 -->
-    <div class="toast-container">
-        <div class="toast toast-custom" id="successToast" role="alert">
-            <div class="toast-header">
+    <div class="toast-container position-fixed z-3">
+
+        <div class="toast toast-custom rounded-3 shadow border-0" id="successToast" role="alert">
+
+            <div class="toast-header bg-success-soft text-white rounded-3 rounded-bottom-0 border-0 p-3">
                 <i class="bi bi-check-circle-fill me-2"></i>
                 <strong class="me-auto">投稿完了</strong>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
             </div>
-            <div class="toast-body">
+
+            <div class="toast-body brown-color p-3">
                 <i class="bi bi-party-popper"></i> 飼育記録が正常に投稿されました！
             </div>
+
         </div>
 
-        <div class="toast toast-custom" id="draftToast" role="alert">
-            <div class="toast-header" style="background: linear-gradient(135deg, #3b82f6, #06b6d4);">
+        <div class="toast toast-custom rounded-3 shadow border-0" id="draftToast" role="alert">
+
+            <div class="toast-header bg-info text-white rounded-3 rounded-bottom-0 border-0 p-3">
                 <i class="bi bi-save-fill me-2"></i>
                 <strong class="me-auto">下書き保存</strong>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
             </div>
-            <div class="toast-body">
-                <i class="bi bi-bookmark-check"></i> 下書きとして保存されました。後で編集できます。
+
+            <div class="toast-body brown-color p-3">
+                <i class="bi bi-bookmark-check"></i> 下書きとして保存されました。
             </div>
+
         </div>
 
-        <div class="toast toast-custom" id="errorToast" role="alert">
-            <div class="toast-header" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
-                <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                <strong class="me-auto">エラー</strong>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
-            </div>
-            <div class="toast-body">
-                必須項目を入力してください。
-            </div>
-        </div>
     </div>
 
     <!-- フッター -->
-    <footer>
+    <footer class="text-white p-2 p-md-5">
         <div class="container">
-            <div class="row">
-                <div class="col-md-4 mb-4">
-                    <h5 class="fw-bold mb-3">
+            <div class="row mt-3">
+                <div class="col-md-5 mb-4">
+                    <h5 class="fw-bold mb-4">
                         <i class="bi bi-heart-fill text-danger"></i> PetLife
                     </h5>
                     <p>ペットとの幸せな暮らしを応援する情報サイト</p>
                 </div>
                 <div class="col-md-2 mb-4">
-                    <h6 class="fw-bold mb-3">サイト情報</h6>
+                    <h6 class="fw-bold mb-4">サイト情報</h6>
                     <ul class="list-unstyled">
                         <li><a href="#" class="text-white text-decoration-none">About</a></li>
                         <li><a href="#" class="text-white text-decoration-none">利用規約</a></li>
@@ -845,15 +469,15 @@
                     </ul>
                 </div>
                 <div class="col-md-2 mb-4">
-                    <h6 class="fw-bold mb-3">サポート</h6>
+                    <h6 class="fw-bold mb-4">サポート</h6>
                     <ul class="list-unstyled">
                         <li><a href="#" class="text-white text-decoration-none">ヘルプ</a></li>
                         <li><a href="#" class="text-white text-decoration-none">お問い合わせ</a></li>
                         <li><a href="#" class="text-white text-decoration-none">FAQ</a></li>
                     </ul>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <h6 class="fw-bold mb-3">フォローする</h6>
+                <div class="col-md-2 mb-4">
+                    <h6 class="fw-bold mb-4">フォローする</h6>
                     <div class="d-flex gap-3">
                         <a href="#" class="text-white fs-4"><i class="bi bi-twitter"></i></a>
                         <a href="#" class="text-white fs-4"><i class="bi bi-instagram"></i></a>
@@ -868,227 +492,60 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
-        // 今日の日時を設定
-        function setToday() {
-            const now = new Date();
-            const year = now.getFullYear();
-            const month = String(now.getMonth() + 1).padStart(2, '0');
-            const day = String(now.getDate()).padStart(2, '0');
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const dateTimeString = `${year}-${month}-${day}T${hours}:${minutes}`;
-            document.getElementById('recordDate').value = dateTimeString;
-        }
+        document.addEventListener('DOMContentLoaded', () => {
 
-        // ページ読み込み時に今日の日時を設定
-        window.addEventListener('DOMContentLoaded', setToday);
-
-        // 気分セレクター
-        document.querySelectorAll('.mood-option').forEach(option => {
-            option.addEventListener('click', function () {
-                document.querySelectorAll('.mood-option').forEach(opt => opt.classList.remove('active'));
-                this.classList.add('active');
+            /* ========= 気分選択 ========= */
+            document.querySelectorAll('.mood-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    document.querySelectorAll('.mood-option')
+                        .forEach(o => o.classList.remove('active'));
+                    option.classList.add('active');
+                });
             });
+
+            /* ========= 写真アップロード ========= */
+            const uploadArea = document.getElementById('uploadArea');
+            const photoInput = document.getElementById('photoInput');
+            const previewContainer = document.getElementById('previewContainer');
+
+            uploadArea.addEventListener('click', () => {
+                photoInput.click();
+            });
+
+            photoInput.addEventListener('change', () => {
+                previewContainer.innerHTML = '';
+
+                Array.from(photoInput.files).forEach(file => {
+                    if (!file.type.startsWith('image/')) return;
+
+                    const col = document.createElement('div');
+                    col.className = 'col-4 col-md-3';
+
+                    const img = document.createElement('img');
+                    img.src = URL.createObjectURL(file);
+                    img.className = 'img-fluid rounded';
+                    img.onload = () => URL.revokeObjectURL(img.src);
+
+                    col.appendChild(img);
+                    previewContainer.appendChild(col);
+                });
+            });
+
         });
 
-        // 画像プレビュー
-        let selectedFiles = [];
-
-        function previewImages(event) {
-            const files = Array.from(event.target.files);
-            const container = document.getElementById('imagePreviewContainer');
-
-            files.forEach((file, index) => {
-                if (selectedFiles.length >= 10) {
-                    alert('最大10枚まで選択できます');
-                    return;
-                }
-
-                if (file.size > 5 * 1024 * 1024) {
-                    alert('ファイルサイズは5MB以下にしてください');
-                    return;
-                }
-
-                selectedFiles.push(file);
-                const reader = new FileReader();
-
-                reader.onload = function (e) {
-                    const preview = document.createElement('div');
-                    preview.className = 'image-preview';
-                    preview.innerHTML = `
-                        <img src="${e.target.result}" alt="プレビュー">
-                        <button class="remove-btn" onclick="removeImage(${selectedFiles.length - 1})">
-                            <i class="bi bi-x"></i>
-                        </button>
-                    `;
-                    container.appendChild(preview);
-                };
-
-                reader.readAsDataURL(file);
-            });
-        }
-
-        function removeImage(index) {
-            selectedFiles.splice(index, 1);
-            const container = document.getElementById('imagePreviewContainer');
-            container.innerHTML = '';
-
-            selectedFiles.forEach((file, idx) => {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    const preview = document.createElement('div');
-                    preview.className = 'image-preview';
-                    preview.innerHTML = `
-                        <img src="${e.target.result}" alt="プレビュー">
-                        <button class="remove-btn" onclick="removeImage(${idx})">
-                            <i class="bi bi-x"></i>
-                        </button>
-                    `;
-                    container.appendChild(preview);
-                };
-                reader.readAsDataURL(file);
-            });
-        }
-
-        // タグ機能
-        let tags = [];
-
-        function addTag(tagText) {
-            if (!tagText || tagText.trim() === '') return;
-
-            if (tags.includes(tagText)) {
-                alert('このタグは既に追加されています');
-                return;
-            }
-
-            if (tags.length >= 10) {
-                alert('タグは最大10個まで追加できます');
-                return;
-            }
-
-            tags.push(tagText);
-            renderTags();
-        }
-
-        function removeTag(index) {
-            tags.splice(index, 1);
-            renderTags();
-        }
-
-        function renderTags() {
-            const container = document.getElementById('tagContainer');
-            const input = document.getElementById('tagInput');
-
-            container.innerHTML = '';
-
-            tags.forEach((tag, index) => {
-                const tagElement = document.createElement('div');
-                tagElement.className = 'tag-item';
-                tagElement.innerHTML = `
-                    <span>${tag}</span>
-                    <span class="remove-tag" onclick="removeTag(${index})">×</span>
-                `;
-                container.appendChild(tagElement);
-            });
-
-            const newInput = input.cloneNode(true);
-            container.appendChild(newInput);
-
-            newInput.addEventListener('keypress', function (e) {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    const value = this.value.trim();
-                    if (value) {
-                        addTag(value);
-                        this.value = '';
-                    }
-                }
-            });
-        }
-
-        // 初期化
-        document.getElementById('tagInput').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                const value = this.value.trim();
-                if (value) {
-                    addTag(value);
-                    this.value = '';
-                }
-            }
-        });
-
-        // フォーム送信
-        document.getElementById('recordForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            // バリデーション
-            const form = e.target;
-            if (!form.checkValidity()) {
-                form.classList.add('was-validated');
-                showToast('errorToast');
-                return;
-            }
-
-            // 成功トースト表示
-            showToast('successToast');
-
-            // フォームリセット（オプション）
-            setTimeout(() => {
-                form.reset();
-                tags = [];
-                selectedFiles = [];
-                document.getElementById('imagePreviewContainer').innerHTML = '';
-                document.getElementById('tagContainer').innerHTML = '<input type="text" class="tag-input-field" id="tagInput" placeholder="タグを入力してEnter">';
-                document.querySelectorAll('.mood-option').forEach(opt => opt.classList.remove('active'));
-                document.querySelector('.mood-option[data-mood="normal"]').classList.add('active');
-                setToday();
-            }, 2000);
-        });
-
-        // 下書き保存
-        function saveDraft() {
-            showToast('draftToast');
-        }
-
-        // Toast表示関数
-        function showToast(toastId) {
-            const toastElement = document.getElementById(toastId);
-            const toast = new bootstrap.Toast(toastElement, {
-                autohide: true,
-                delay: 5000
+        /* ========= Toast ========= */
+        function showToast(id) {
+            const toastEl = document.getElementById(id);
+            const toast = new bootstrap.Toast(toastEl, {
+                delay: 3000,
+                autohide: true
             });
             toast.show();
         }
-
-        // ドラッグ&ドロップ機能
-        const uploadArea = document.querySelector('.file-upload-area');
-
-        uploadArea.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            uploadArea.style.borderColor = 'var(--primary-color)';
-            uploadArea.style.background = 'rgba(16, 185, 129, 0.05)';
-        });
-
-        uploadArea.addEventListener('dragleave', () => {
-            uploadArea.style.borderColor = '#e5e7eb';
-            uploadArea.style.background = '#fafafa';
-        });
-
-        uploadArea.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadArea.style.borderColor = '#e5e7eb';
-            uploadArea.style.background = '#fafafa';
-
-            const files = e.dataTransfer.files;
-            const fileInput = document.getElementById('fileInput');
-            fileInput.files = files;
-
-            const event = new Event('change', { bubbles: true });
-            fileInput.dispatchEvent(event);
-        });
     </script>
+
 </body>
 
 </html>

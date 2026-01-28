@@ -1,0 +1,17 @@
+.helpful-btn {
+  color: #6b7280; /* 通常：グレー */
+}
+
+.helpful-btn.active {
+  color: #22c55e; /* 押した後：グリーン */
+}
+
+.col-md-6 > .bg-white {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.bg-white > .p-3 {
+  flex-grow: 1;
+}

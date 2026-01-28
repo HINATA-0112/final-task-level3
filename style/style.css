@@ -1,0 +1,239 @@
+/* ページ全体のスタイル */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--body-main-color);
+}
+
+:root {
+  --success-color: #10b981;
+  --orange-color: #f59e0b;
+  --teal-color: #06b6d4;
+  --purple-color: #8b5cf6;
+  --accent-color: #ffa2558d;
+  --brown-color: #78350f;
+  --red-color: #ef4444;
+  --body-main-color: #fef3c7;
+  --gradient-color: linear-gradient(135deg, #dcfce7 0%, #fed7aa 100%);
+}
+
+/* 緑 */
+.success-color {
+  color: var(--success-color) !important;
+}
+
+.bg-success-soft {
+  background: var(--success-color) !important;
+}
+
+/* オレンジ */
+.orange-color {
+  color: var(--orange-color) !important;
+}
+
+.bg-orange-soft {
+  background: var(--orange-color) !important;
+}
+
+/* オレンジ薄め */
+.accent-color {
+  color: var(--accent-color) !important;
+}
+
+.bg-accent-soft {
+  background: var(--accent-color) !important;
+}
+
+/* 水色 */
+.teal-color {
+  color: var(--teal-color) !important;
+}
+
+.bg-teal-soft {
+  background: var(--teal-color) !important;
+}
+
+/* 紫 */
+.purple-color {
+  color: var(--purple-color) !important;
+}
+
+.bg-purple-soft {
+  background: var(--purple-color) !important;
+}
+
+/* 赤 */
+.red-color {
+  color: var(--red-color) !important;
+}
+
+.bg-red-soft {
+  background: rgba(239, 68, 68, 0.1);
+}
+
+/* 茶色 */
+.brown-color {
+  color: var(--brown-color) !important;
+}
+
+.bg-brown-color {
+  background: var(--brown-color) !important;
+}
+
+/* 背景色 */
+.body-main-color {
+  background-color: var(--body-main-color) !important;
+}
+
+/* グラデーションカラー */
+.bg-gradient-soft {
+  background: var(--gradient-color);
+}
+
+/* ページヘッダーのスタイル */
+.page-header {
+  background: var(--gradient-color);
+  padding: 120px 0;
+}
+
+/* ナビゲーションバー */
+.navbar {
+  color: var(--brown-color);
+}
+
+/* ナビゲーションバーのブランドロゴ */
+.navbar-brand,
+.stats-number {
+  color: var(--success-color) !important;
+}
+
+/* ナビゲーションバーのリンク */
+.nav-link {
+  color: var(--brown-color) !important;
+}
+
+/* ナビゲーションバーのリンクホバー */
+.nav-link:hover {
+  color: var(--success-color) !important;
+}
+
+/* ヒーローセクション */
+.hero-section {
+  min-height: 90vh;
+}
+
+/* ヒーローセクションの画像 */
+.hero-image {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* フロートアニメーション */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* ペットカード */
+.pet-card {
+  transition: all 0.3s ease;
+  border: 3px solid transparent;
+}
+
+/* ペットカードのホバー効果 */
+.pet-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
+  border-color: var(--body-main-color);
+}
+
+.btn[class*="btn-outline-"]:hover,
+.btn[class*="btn-outline-"]:focus {
+  color: white;
+}
+
+.btn.btn-outline-danger:focus {
+  color: red;
+}
+
+.btn-outline-success:hover {
+  background-color: var(--success-color);
+}
+
+.btn-outline-orange:hover {
+  background-color: var(--orange-color);
+}
+
+.btn-outline-teal:hover {
+  background-color: var(--teal-color);
+}
+
+.btn-outline-purple:hover {
+  background-color: var(--purple-color);
+}
+
+.btn-outline-orange {
+  border: 1px solid var(--orange-color);
+  color: var(--orange-color);
+  background-color: transparent;
+}
+
+.btn-outline-purple {
+  border: 1px solid var(--purple-color);
+  color: var(--purple-color);
+  background-color: transparent;
+}
+
+.btn-outline-teal {
+  border: 1px solid var(--teal-color);
+  color: var(--teal-color);
+  background-color: transparent;
+}
+
+.pet-icon,
+.category-icon,
+.feature-icon {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  margin: 0 auto 20px;
+}
+
+.guide-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-right: 40px;
+  flex-shrink: 0;
+}
+
+.stat-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 15px;
+  font-size: 1.8rem;
+}
+
+footer {
+  background-color: var(--brown-color);
+}
+
+::placeholder {
+  font-size: 0.85rem;
+}
